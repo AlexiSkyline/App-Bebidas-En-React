@@ -19,7 +19,7 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
       position: 'absolute',
-      width: 600,
+      width: 450,
       backgroundColor: theme.palette.background.paper,
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
@@ -42,7 +42,21 @@ export const Receta = ({ receta }) => {
         setOpen( false );
     }
 
-    const { setIdReceta } = useContext( ModalContext );
+    const { informacion, setIdReceta, setInformacion } = useContext( ModalContext );
+
+    const mostrarIngredientes = informacion => {
+        let ingredientes = [];
+
+        for( let i = 1; i < 16; i++ ) {
+            if( informacion[`strIngredient${i}`] ) {
+                ingredientes.push(
+                    <li>{ informacion[`strIngredient${i}`] } { informacion[`strMeasure${i}`] } </li>
+                );   
+            }
+        }
+
+        return ingredientes;
+    }
 
     return (
         <div className='col-md-4 mb-3'>
@@ -67,11 +81,23 @@ export const Receta = ({ receta }) => {
                         open={ open }
                         onClose={ () => {
                             setIdReceta( null );
+                            setInformacion({});
                             handleClose();
                         }}
                     >
                         <div style={ modalStyle } className={ classes.paper}>
-                            <h1>Desde Modal</h1>
+                            <h2>{ informacion.strDrink }</h2>
+                            <h3 className='mt-4'>Intrucciones</h3>
+                            <p>
+                                { informacion.strInstructions }
+                            </p>
+                            
+                            <img className='img-fluid my-4' src={ informacion.strDrinkThumb } alt={ `Imagen de ${ informacion.strDrink }` }/>
+
+                            <h3>Ingredientes y catidades</h3>
+                            <ul>
+                                { mostrarIngredientes( informacion ) }
+                            </ul>
                         </div>
                     </Modal>
                 </div>
