@@ -27,6 +27,7 @@ export const RecetasProvider = ( props ) => {
             obtenerRecetas();
         }
     }, [busqueda]);
+    
     return (
         <RecetasContext.Provider
             value={{
