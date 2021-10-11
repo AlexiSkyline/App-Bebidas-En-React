@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ModalContext } from '../Context/ModalContext'
 
 export const Receta = ({ receta }) => {
+
+    const { setIdReceta } = useContext( ModalContext );
+
     return (
         <div className='col-md-4 mb-3'>
             <div className='card'>
@@ -12,6 +16,9 @@ export const Receta = ({ receta }) => {
                     <button
                         type='button'
                         className='btn btn-block btn-primary'
+                        onClick={ () => {
+                            setIdReceta( receta.idDrink );
+                        }}
                     >
                         Ver Receta
                     </button>

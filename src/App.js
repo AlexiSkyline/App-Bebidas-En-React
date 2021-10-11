@@ -4,12 +4,14 @@ import { Header } from './Components/Header';
 import { ListaRecetas } from './Components/ListaRecetas';
 
 import { CategoriasProvider } from './Context/CategoriasContext';
+import { ModalProvider } from './Context/ModalContext';
 import { RecetasProvider } from './Context/RecetasContext';
 
 function App() {
   return (
     <CategoriasProvider>
       <RecetasProvider>
+        <ModalProvider>
           <Header />
 
           <div className='container mt-5'>
@@ -20,6 +22,7 @@ function App() {
             <ListaRecetas />
           </div>
            
+        </ModalProvider>
       </RecetasProvider>
     </CategoriasProvider>
   );
